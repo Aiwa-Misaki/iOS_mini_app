@@ -27,7 +27,6 @@
     if(minute<10) str1=[NSString stringWithFormat:@"0%ld",(long)minute];
     
 //    //动画组
-//    self.img.contentMode = UIViewContentModeCenter;
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (int i=0; i<=9; i++) {
         [array addObject:[UIImage imageNamed:[[NSString alloc] initWithFormat:@"bear%d.PNG",i]]];
@@ -47,11 +46,7 @@
     self.tmpM.text=str1;
     
     self.img.image=[UIImage imageNamed:@"bear0.PNG"];
-
-    
-    
-
-    
+  
 }
 
 - (void)viewDidLoad {

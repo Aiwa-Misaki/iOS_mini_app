@@ -6,10 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TomatoViewController : UIViewController
+// 触摸移动
+- (void)touchesMoved:(UITapGestureRecognizer *)sender;
+-(void)initUserInterface;
+-(void)initUI;
 
 @end
 
