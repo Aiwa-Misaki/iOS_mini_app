@@ -44,7 +44,6 @@
             else if(deltax<0)
                 arc=PI;
         }else if(deltax>=0 && deltay<0){//第一象限
-            NSLog(@"当前正切值是%.2f",deltax/deltay);
             arc=atan(fabs(deltax/deltay));
         }else if(deltax>=0 && deltay>0){//第二象限
             arc=PI-atan(deltax/deltay);
@@ -54,12 +53,19 @@
             arc=2*PI-atan(fabs(deltax/deltay));
         }
         CGFloat degree=arc*(180/PI);
-        NSLog(@"当前与12:00夹角为%.1f度",degree);
+//        NSLog(@"当前与12:00夹角为%.1f度",degree);
+        _clockSelect.degree=degree;
         [self.clockSelect setArc:arc];
         
         //这里计算sin和cos值，传入和12:00的角度（顺时针为正，[0,360)）
     }else if (gesture.state==UIGestureRecognizerStateEnded){
-        
+        //这里修改arc和degree，变成时间是5的倍数
+        //封装得不好，为什么要传两个一样的参数
+        //五分钟为30度
+        _clockSelect.degree=roundf(_clockSelect.degree/30.0)*30;
+        [_clockSelect setArc:_clockSelect.degree/(360/(2*PI))];
+//        NSLog(@"此处的arc为%.2f",_clockSelect.arc);
+        //这边重绘
     }
     
 }
