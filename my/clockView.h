@@ -38,6 +38,10 @@ typedef enum{
 
 - (void)timeChange;//根据时间改变重绘界面
 
+- (void)timeMinus;//时间-1
+
+- (void)calcDegArc;
+
 @end
 
 NS_ASSUME_NONNULL_END

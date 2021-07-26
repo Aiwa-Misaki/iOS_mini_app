@@ -18,6 +18,7 @@
     [self setHeight:clock_radis];
     self.arc=0;
     self.remainSec=0;
+    self.status=NOT_START;
     return self;
 }
 
@@ -39,7 +40,12 @@
     [[UIColor whiteColor] set];
       CGContextStrokePath(context);
     //根据arc来设定秒数
-    _remainSec=(_degree/360)*3600;
+    if(_status==NOT_START||_status==STOPPED){
+        _remainSec=(_degree/360)*3600;
+    }else if(_status==COUNTING){
+        
+    }
+
     //绘制中间的时间标签
     [self initUI];
     //绘制按钮
@@ -73,6 +79,19 @@
     if(second<10) s=[NSString stringWithFormat:@"0%@",s];
     if(minute<10) m=[NSString stringWithFormat:@"0%@",m];
     _timeDisplay=[NSString stringWithFormat:@"%@:%@",m,s];
+    //修改arc和degree
+}
+
+- (void)timeMinus{
+    _remainSec=_remainSec-1;
+    NSLog(@"%ld",_remainSec);
+    [self calcDegArc];
+    [self setNeedsDisplay];
+}
+
+- (void)calcDegArc{
+    _arc=(_remainSec/10)/(180/PI);
+    _arc-=0.5*PI;
 }
 
 @end
