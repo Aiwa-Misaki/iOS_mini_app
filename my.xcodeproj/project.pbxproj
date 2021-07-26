@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6972063A242AD972262BF92A /* Pods_my.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E9F7C2BCE85BACAA8CCCA66 /* Pods_my.framework */; };
 		8CE01C072698C10100D818CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE01C062698C10100D818CE /* AppDelegate.m */; };
 		8CE01C0A2698C10100D818CE /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE01C092698C10100D818CE /* SceneDelegate.m */; };
 		8CE01C0D2698C10100D818CE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE01C0C2698C10100D818CE /* ViewController.m */; };
@@ -29,11 +28,11 @@
 		8CE01C3B2698C51E00D818CE /* CountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE01C3A2698C51E00D818CE /* CountViewController.m */; };
 		8CE01C3D2698C69500D818CE /* bear0.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 8CE01C3C2698C69500D818CE /* bear0.PNG */; };
 		8CEDF19B26A021C30041BD89 /* clockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEDF19A26A021C30041BD89 /* clockView.m */; };
+		8CEDF19E26A185890041BD89 /* UIView+FrameMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEDF19D26A185890041BD89 /* UIView+FrameMethods.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0A257F29D21CDB288471B21E /* Pods-my.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-my.release.xcconfig"; path = "Target Support Files/Pods-my/Pods-my.release.xcconfig"; sourceTree = "<group>"; };
-		2E9F7C2BCE85BACAA8CCCA66 /* Pods_my.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_my.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CE01C022698C10100D818CE /* my.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CE01C052698C10100D818CE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8CE01C062698C10100D818CE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -64,6 +63,8 @@
 		8CE01C3C2698C69500D818CE /* bear0.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bear0.PNG; sourceTree = "<group>"; };
 		8CEDF19926A021C30041BD89 /* clockView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = clockView.h; sourceTree = "<group>"; };
 		8CEDF19A26A021C30041BD89 /* clockView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = clockView.m; sourceTree = "<group>"; };
+		8CEDF19C26A185690041BD89 /* UIView+FrameMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameMethods.h"; sourceTree = "<group>"; };
+		8CEDF19D26A185890041BD89 /* UIView+FrameMethods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameMethods.m"; sourceTree = "<group>"; };
 		CC00E2E65BDA02F4B3570AE1 /* Pods-my.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-my.debug.xcconfig"; path = "Target Support Files/Pods-my/Pods-my.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,7 +73,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6972063A242AD972262BF92A /* Pods_my.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +82,6 @@
 		0E69A171075CBD75164A87BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2E9F7C2BCE85BACAA8CCCA66 /* Pods_my.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -137,6 +136,8 @@
 				8CE01C3A2698C51E00D818CE /* CountViewController.m */,
 				8CEDF19926A021C30041BD89 /* clockView.h */,
 				8CEDF19A26A021C30041BD89 /* clockView.m */,
+				8CEDF19C26A185690041BD89 /* UIView+FrameMethods.h */,
+				8CEDF19D26A185890041BD89 /* UIView+FrameMethods.m */,
 			);
 			path = my;
 			sourceTree = "<group>";
@@ -268,6 +269,7 @@
 				8CE01C372698C4FE00D818CE /* TomatoViewController.m in Sources */,
 				8CE01C342698C4E800D818CE /* ClockViewController.m in Sources */,
 				8CE01C182698C10200D818CE /* main.m in Sources */,
+				8CEDF19E26A185890041BD89 /* UIView+FrameMethods.m in Sources */,
 				8CEDF19B26A021C30041BD89 /* clockView.m in Sources */,
 				8CE01C0A2698C10100D818CE /* SceneDelegate.m in Sources */,
 				8CE01C3B2698C51E00D818CE /* CountViewController.m in Sources */,
