@@ -10,8 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 #define PI 3.141592653
-#define clock_radis 350
-#define bear_width 50
+//#define clock_radis 350
+//#define bear_width 50
 
 typedef enum{
     NOT_START=0,
@@ -21,14 +21,17 @@ typedef enum{
 } CLOCK_STATUS;//计时状态
 
 @interface clockView : UIView
-@property (nonatomic,strong)UIButton *setButton;//设置时间按钮
-@property (nonatomic,strong)UIButton *pulseButton;//暂停按钮
-@property (nonatomic,strong)UIButton *startButton;//开始按钮
+@property (nonatomic,strong) UIButton *setButton;//设置时间按钮
+@property (nonatomic,strong) UIButton *pulseButton;//暂停按钮
+@property (nonatomic,strong) UIButton *startButton;//开始按钮
 @property (nonatomic,assign) CGFloat arc;//弧度,3:00为零点，顺时针为正
-@property(nonatomic,assign) CGFloat degree;//度数
+@property (nonatomic,assign) CGFloat degree;//度数
 @property (nonatomic,assign) NSInteger remainSec;//剩余的秒数
 @property (nonatomic,assign) CLOCK_STATUS status;//计时状态
 @property (nonatomic,assign) NSString* timeDisplay;//正中间显示的时间
+@property (nonatomic,strong) UILabel *timeLabel;
+@property (nonatomic,assign) NSInteger clock_radius;//时钟半径
+@property (nonatomic,assign) NSInteger bear_width;//熊的宽度
 
 - (void)drawRect:(CGRect)rect;
 

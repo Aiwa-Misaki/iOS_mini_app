@@ -13,33 +13,34 @@
 
 @implementation clockView
 
-- (clockView *)init{
+- (clockView *)init{//初始化函数
     self=[super init];
-    [self setWidth:clock_radis];
-    [self setHeight:clock_radis];
+    //根据屏幕大小初始化radius和bear_width
+    _clock_radius=UIScreen.mainScreen.bounds.size.width*0.4;
+    _bear_width=_clock_radius*0.3;
+    [self setWidth:_clock_radius*2];
+    [self setHeight:_clock_radius*2];
     self.arc=0;
     self.remainSec=0;
     self.status=NOT_START;
+    [self timeChange];
+    _timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 400)];
+    [_timeLabel setText:_timeDisplay];
+    [_timeLabel setFont:[UIFont fontWithName:@"DBLCDTempBlack" size:(NSInteger)(_clock_radius/3.5)]];
+    [_timeLabel setCenter:CGPointMake(self.center.x-self.frame.origin.x, self.center.y-self.frame.origin.y)];
+    [_timeLabel setTextAlignment:NSTextAlignmentCenter];
+    [_timeLabel setTextColor:[UIColor whiteColor]];
+    [self addSubview:_timeLabel];
     return self;
 }
 
-- (void)drawRect:(CGRect)rect {
+- (void)drawRect:(CGRect)rect {//paint函数，每次重绘时自动调用
     //界面背景：粉色
     UIColor *cutePink=[UIColor colorWithRed:221/255.0 green:199/255.0 blue:222/255.0 alpha:1];
     [cutePink setFill];
     UIRectFill(rect);
     //圆形背景：浅粉
-    CGContextRef ctx=UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(ctx, bear_width*3);
-    CGContextAddArc(ctx, self.center.x-self.frame.origin.x,self.center.y-self.frame.origin.y, rect.size.width/2-2*bear_width, 0,2*PI , 0);
-    [[UIColor colorWithWhite:30 alpha:0.4] set];
-      CGContextStrokePath(ctx);
-    //绘制根据arc角度绘制的圆弧
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, bear_width);
-    CGContextAddArc(context, self.center.x-self.frame.origin.x,self.center.y-self.frame.origin.y, rect.size.width/2-bear_width, -0.5*PI,self.arc , 0);
-    [[UIColor whiteColor] set];
-      CGContextStrokePath(context);
+    [self drawArc:rect];
     //根据arc来设定秒数
     if(_status==NOT_START||_status==STOPPED){
         _remainSec=(_degree/360)*3600;
@@ -47,23 +48,35 @@
         
     }
     //绘制熊头
-    
-    
-    //绘制中间的时间标签
-    [self initUI];
-    //绘制按钮
-
+    [self timeChange];
 }
 
-- (UIImage*)getRotatedBear{//按照度数计算角度
+- (void)drawArc:(CGRect)rect{//绘制圆弧及其背景
+    CGContextRef ctx=UIGraphicsGetCurrentContext();
+    NSInteger circle_radius=_clock_radius*2-_bear_width;
+    CGRect aRect= CGRectMake(self.center.x-self.frame.origin.x-circle_radius/2,self.center.y-self.frame.origin.y-circle_radius/2,circle_radius,circle_radius);
+    [[UIColor colorWithWhite:30 alpha:0.4] set];
+    CGContextFillEllipseInRect(ctx, aRect);
+    CGContextDrawPath(ctx, kCGPathStroke);
+    
+    //绘制根据arc角度绘制的圆弧
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, _bear_width);
+    CGContextAddArc(context, self.center.x-self.frame.origin.x,self.center.y-self.frame.origin.y, rect.size.width/2-_bear_width, -0.5*PI,self.arc , 0);
+    [[UIColor whiteColor] set];
+      CGContextStrokePath(context);
+}
+
+- (UIImage*)getRotatedBear{//旋转熊头（按照图片中心
     //arc和本体的arc一致
     CGFloat rotateArc=self.arc;
     UIImage *head = [UIImage imageNamed:@"bearHead.png"];
     return [head rotateImageWithRadian:rotateArc cropMode:enSvCropExpand];
 }
-- (void)drawBear{
+
+- (void)drawBear{//绘制熊头
     UIImage *rotatedBear=[self getRotatedBear];
-    NSInteger radius=clock_radis+bear_width;
+    NSInteger radius=_clock_radius+_bear_width;
     CGFloat normalArc=self.arc;//转换为12:00开始的arc值
     if(normalArc<0) normalArc+=2*PI;
     //画图基准点在左上角，往左上挪动
@@ -78,18 +91,7 @@
     [self setNeedsDisplay];
 }
 
-- (void)initUI{//打印label
-    [self timeChange];
-    //字体属性
-    NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:
-                               [UIFont fontWithName:@"DBLCDTempBlack" size:50], NSFontAttributeName,
-                               [UIColor whiteColor], NSForegroundColorAttributeName, nil];
-    //绘制，指定左上角坐标和字体属性
-    [_timeDisplay drawAtPoint:CGPointMake(self.center.x-self.frame.origin.x-65, self.center.y-self.frame.origin.y-22) withAttributes:dict];
-
-}
-
--(void) timeChange{//修改要显示的label
+- (void)timeChange{//修改要显示的label
     //首先计算出分、秒
     NSInteger second=_remainSec % 60;
     NSInteger minute=(_remainSec-second)/60;
@@ -98,14 +100,16 @@
     if(second<10) s=[NSString stringWithFormat:@"0%@",s];
     if(minute<10) m=[NSString stringWithFormat:@"0%@",m];
     _timeDisplay=[NSString stringWithFormat:@"%@:%@",m,s];
+    NSLog(_timeDisplay);
+    [_timeLabel setText:_timeDisplay];
     //修改arc和degree
 }
 
 - (void)timeMinus{
     if(self.remainSec>0){
         _remainSec=_remainSec-1;
-        NSLog(@"%ld",_remainSec);
         [self calcDegArc];
+        [self timeChange];
         [self setNeedsDisplay];
     }
 }

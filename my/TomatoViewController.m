@@ -27,14 +27,13 @@
 }
 -(void)initUI{
     self.clockSelect=[[clockView alloc] init];
-    self.clockSelect.center=self.view.center;
+    self.clockSelect.center=CGPointMake(self.view.center.x, 0.88*self.view.center.y);
     [self.view addSubview:self.clockSelect];
     [self.clockSelect setNeedsDisplay];
     self.startButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     [self initButton:_startButton buttontype:1];
     self.pulseButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     [self initButton:_pulseButton buttontype:2];
-//    NSLog(@"The status is - %@, %@, %@",_setButton.hidden ? @"YES":@"NO",_startButton.hidden ? @"YES":@"NO",_pulseButton.hidden ? @"YES":@"NO");
 }
 -(void)initButton:(UIButton*)button buttontype:(NSInteger)type{
     button.layer.cornerRadius =15;
@@ -70,18 +69,35 @@
 
 
 - (void)startButtonClicked:(UIButton *)sender{
-    NSLog(@"start clicked!");
     _clockSelect.status=COUNTING;
     _startButton.hidden=!_startButton.hidden;
     _pulseButton.hidden=!_pulseButton.hidden;
-//    NSLog(@"The status is - %@, %@, %@",_setButton.hidden ? @"YES":@"NO",_startButton.hidden ? @"YES":@"NO",_pulseButton.hidden ? @"YES":@"NO");
+    //渐变效果
+    UIColor *originalColor=self.view.backgroundColor;
+    UIColor *nextColor=[UIColor colorWithRed:88/255.0 green:178/255.0 blue:220/255.0 alpha:1.0];
+    NSInteger changeTime=20;
+    NSTimeInterval interval=1;
+    CGFloat *originalRGB=CGColorGetComponents(originalColor.CGColor);
+    CGFloat *nextRGB=CGColorGetComponents(nextColor.CGColor);
+    UIColor *delta=[UIColor colorWithRed:(nextRGB[0]-originalRGB[0])/(changeTime/interval) green:(nextRGB[1]-originalRGB[1])/(changeTime/interval) blue:(nextRGB[2]-originalRGB[2])/(changeTime/interval) alpha:1.0];
+    [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(colorChange:) userInfo:delta repeats:NO];
 }
+
+- (void)colorChange:(NSTimer *)timer{//这个UIColor都是增量
+    UIColor *delta=[timer userInfo];
+    CGFloat *originalRGB=CGColorGetComponents(self.view.backgroundColor.CGColor);
+    CGFloat *deltaRGB=CGColorGetComponents(delta.CGColor);
+    originalRGB[0]+=deltaRGB[0];
+    originalRGB[1]+=deltaRGB[1];
+    originalRGB[2]+=deltaRGB[2];
+    [self.view setBackgroundColor:[UIColor colorWithRed:originalRGB[0] green:originalRGB[1] blue:originalRGB[2] alpha:1.0]];
+    [self.view setNeedsDisplay];
+}
+
 - (void)pulseButtonClicked:(UIButton *)sender{
-    NSLog(@"pulse clicked!");
     _clockSelect.status=STOPPED;
     _pulseButton.hidden=!_pulseButton.hidden;
     _startButton.hidden=!_startButton.hidden;
-//    NSLog(@"The status is - %@, %@, %@",_setButton.hidden ? @"YES":@"NO",_startButton.hidden ? @"YES":@"NO",_pulseButton.hidden ? @"YES":@"NO");
 }
 // 触摸移动
 - (void)touchesMoved:(UITapGestureRecognizer *)gesture{
@@ -131,7 +147,6 @@
 - (void)timeChange{
     if(_clockSelect.status==COUNTING){
         [_clockSelect timeMinus];
-//        NSLog(@"%ld",_clockSelect.remainSec);
     }
 }
 
