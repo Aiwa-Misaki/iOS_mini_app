@@ -6,7 +6,8 @@
 //
 
 #import "clockView.h"
-#include "UIView+FrameMethods.h"
+#import "UIView+FrameMethods.h"
+#import "UIImage+Rotate.h"
 
 
 
@@ -45,11 +46,29 @@
     }else if(_status==COUNTING){
         
     }
-
+    //绘制熊头
+    
+    
     //绘制中间的时间标签
     [self initUI];
     //绘制按钮
 
+}
+
+- (UIImage*)getRotatedBear{//按照度数计算角度
+    //arc和本体的arc一致
+    CGFloat rotateArc=self.arc;
+    UIImage *head = [UIImage imageNamed:@"bearHead.png"];
+    return [head rotateImageWithRadian:rotateArc cropMode:enSvCropExpand];
+}
+- (void)drawBear{
+    UIImage *rotatedBear=[self getRotatedBear];
+    NSInteger radius=clock_radis+bear_width;
+    CGFloat normalArc=self.arc;//转换为12:00开始的arc值
+    if(normalArc<0) normalArc+=2*PI;
+    //画图基准点在左上角，往左上挪动
+    
+    [rotatedBear drawAtPoint:CGPointMake(self.center.x-self.frame.origin.x, self.center.y-self.frame.origin.y)];
 }
 
 - (void)setArc:(CGFloat)arc{//设置角度 这个arc是从12:00开始的
@@ -83,10 +102,12 @@
 }
 
 - (void)timeMinus{
-    _remainSec=_remainSec-1;
-    NSLog(@"%ld",_remainSec);
-    [self calcDegArc];
-    [self setNeedsDisplay];
+    if(self.remainSec>0){
+        _remainSec=_remainSec-1;
+        NSLog(@"%ld",_remainSec);
+        [self calcDegArc];
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)calcDegArc{
