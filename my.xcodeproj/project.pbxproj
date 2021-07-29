@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C7831AF26B24B9000971BBD /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7831AE26B24B9000971BBD /* UIImage+Rotate.m */; };
+		8C7831B326B257A300971BBD /* bearHead.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C7831B226B257A300971BBD /* bearHead.png */; };
 		8CE01C072698C10100D818CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE01C062698C10100D818CE /* AppDelegate.m */; };
 		8CE01C0A2698C10100D818CE /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE01C092698C10100D818CE /* SceneDelegate.m */; };
 		8CE01C0D2698C10100D818CE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE01C0C2698C10100D818CE /* ViewController.m */; };
@@ -33,6 +35,9 @@
 
 /* Begin PBXFileReference section */
 		0A257F29D21CDB288471B21E /* Pods-my.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-my.release.xcconfig"; path = "Target Support Files/Pods-my/Pods-my.release.xcconfig"; sourceTree = "<group>"; };
+		8C7831AD26B24AE600971BBD /* UIImage+Rotate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Rotate.h"; sourceTree = "<group>"; };
+		8C7831AE26B24B9000971BBD /* UIImage+Rotate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rotate.m"; sourceTree = "<group>"; };
+		8C7831B226B257A300971BBD /* bearHead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bearHead.png; sourceTree = "<group>"; };
 		8CE01C022698C10100D818CE /* my.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = my.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CE01C052698C10100D818CE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8CE01C062698C10100D818CE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -95,6 +100,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		8C7831A626B191BE00971BBD /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				8C7831B226B257A300971BBD /* bearHead.png */,
+				8CE01C402698CA5A00D818CE /* bear */,
+			);
+			path = resource;
+			sourceTree = "<group>";
+		};
 		8CE01BF92698C10000D818CE = {
 			isa = PBXGroup;
 			children = (
@@ -116,7 +130,7 @@
 		8CE01C042698C10100D818CE /* my */ = {
 			isa = PBXGroup;
 			children = (
-				8CE01C402698CA5A00D818CE /* bear */,
+				8C7831A626B191BE00971BBD /* resource */,
 				8CE01C052698C10100D818CE /* AppDelegate.h */,
 				8CE01C062698C10100D818CE /* AppDelegate.m */,
 				8CE01C082698C10100D818CE /* SceneDelegate.h */,
@@ -138,6 +152,8 @@
 				8CEDF19A26A021C30041BD89 /* clockView.m */,
 				8CEDF19C26A185690041BD89 /* UIView+FrameMethods.h */,
 				8CEDF19D26A185890041BD89 /* UIView+FrameMethods.m */,
+				8C7831AD26B24AE600971BBD /* UIImage+Rotate.h */,
+				8C7831AE26B24B9000971BBD /* UIImage+Rotate.m */,
 			);
 			path = my;
 			sourceTree = "<group>";
@@ -217,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CE01C2D2698C49900D818CE /* bear7.PNG in Resources */,
+				8C7831B326B257A300971BBD /* bearHead.png in Resources */,
 				8CE01C2B2698C49900D818CE /* bear8.PNG in Resources */,
 				8CE01C2A2698C49900D818CE /* bear6.PNG in Resources */,
 				8CE01C152698C10200D818CE /* LaunchScreen.storyboard in Resources */,
@@ -272,6 +289,7 @@
 				8CEDF19E26A185890041BD89 /* UIView+FrameMethods.m in Sources */,
 				8CEDF19B26A021C30041BD89 /* clockView.m in Sources */,
 				8CE01C0A2698C10100D818CE /* SceneDelegate.m in Sources */,
+				8C7831AF26B24B9000971BBD /* UIImage+Rotate.m in Sources */,
 				8CE01C3B2698C51E00D818CE /* CountViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

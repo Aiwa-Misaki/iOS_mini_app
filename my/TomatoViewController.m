@@ -7,7 +7,6 @@
 
 #import "TomatoViewController.h"
 #import "clockView.h"
-#import "myButton.h"
 #include "PopupView.h"
 
 @interface TomatoViewController ()
